@@ -49,16 +49,16 @@
               {{ with $data.title }}{{ $title = . }}{{ end }}
             {{ end }}
             <a
-              class="link link-{{ $type }} mb-3 min-w-full rounded py-2 text-lg sm:px-24"
+              class="link link-{{ $type }} mb-3 flex rounded px-4 py-2 text-lg sm:px-4"
               href="{{ $href }}"
               target="{{ $target }}"
               {{ with $title }}title="{{ . }}"{{ end }}
               rel="me noopener noreferrer"
             >
               {{- with $icon -}}
-                <span class="mr-1">{{ partial "icon.html" . }}</span>
+                <span class="mr-1 flex flex-none items-center">{{ partial "icon.html" . }}</span>
               {{- end -}}
-              {{ $text | emojify }}
+              <span class="flex-auto grow sm:px-24">{{ $text | emojify }}</span>
             </a>
           {{ end }}
         {{ end }}
