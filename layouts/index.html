@@ -41,24 +41,33 @@
             {{ $text := i18n (printf "link.%s" $type) }}
             {{ $target := "_blank" }}
             {{ $title := "" }}
+            {{ $subtitle := "" }}
             {{ if reflect.IsMap $data }}
               {{ with $data.href }}{{ $href = . }}{{ end }}
               {{ with $data.icon }}{{ $icon = . }}{{ end }}
               {{ with $data.text }}{{ $text = . }}{{ end }}
               {{ with $data.target }}{{ $target = . }}{{ end }}
               {{ with $data.title }}{{ $title = . }}{{ end }}
+              {{ with $data.subtitle }}{{ $subtitle = . }}{{ end }}
             {{ end }}
             <a
-              class="link link-{{ $type }} mb-3 flex rounded px-4 py-2 text-lg sm:px-4"
+              class="link link-{{ $type }} mb-3 flex items-center rounded px-4 sm:px-4"
               href="{{ $href }}"
               target="{{ $target }}"
               {{ with $title }}title="{{ . }}"{{ end }}
               rel="me noopener noreferrer"
             >
               {{- with $icon -}}
-                <span class="mr-1 flex flex-none items-center">{{ partial "icon.html" . }}</span>
+                <span class="py-link-icon mr-1 flex flex-none items-center text-lg">
+                  {{ partial "icon.html" . }}
+                </span>
               {{- end -}}
-              <span class="flex-auto grow sm:px-24">{{ $text | emojify }}</span>
+              <span class="flex flex-auto grow flex-col items-center">
+                <span class="text-lg sm:px-24">{{ $text | emojify }}</span>
+                {{ if $subtitle }}
+                  <span class="-mt-1.5 max-w-72 text-xs">{{ $subtitle | emojify }}</span>
+                {{ end }}
+              </span>
             </a>
           {{ end }}
         {{ end }}

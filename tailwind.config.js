@@ -94,6 +94,9 @@ module.exports = {
           },
         },
       }),
+      padding: {
+        "link-icon": "0.8rem",
+      },
     },
   },
   plugins: [require("@tailwindcss/typography")],
